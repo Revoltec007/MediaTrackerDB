@@ -22,7 +22,7 @@ batch_size = 50000
 data_batches = {
     'genre': [],
     'theme': [],
-    'collection': [],
+    'series': [],
     'franchise': []
 }
 
@@ -30,7 +30,7 @@ data_batches = {
 insert_queries = {
     'genre': "INSERT INTO bgd.GameGenres ([GameID], [GameName], [GenreID], [GenreName]) VALUES (?, ?, ?, ?)",
     'theme': "INSERT INTO bgd.GameThemes ([GameID], [GameName], [ThemeID], [ThemeName]) VALUES (?, ?, ?, ?)",
-    'collection': "INSERT INTO bgd.GameCollections ([GameID], [GameName], [CollectionID], [CollectionName]) VALUES (?, ?, ?, ?)",
+    'series': "INSERT INTO bgd.GameSeries ([GameID], [GameName], [SeriesID], [SeriesName]) VALUES (?, ?, ?, ?)",
     'franchise': "INSERT INTO bgd.GameFranchises ([GameID], [GameName], [FranchiseID], [FranchiseName]) VALUES (?, ?, ?, ?)"
 }
 
@@ -45,7 +45,7 @@ try:
     # Optional: Clearing the tables before the new full load
     cursor.execute("TRUNCATE TABLE bgd.GameGenres")
     cursor.execute("TRUNCATE TABLE bgd.GameThemes")
-    cursor.execute("TRUNCATE TABLE bgd.GameCollections")
+    cursor.execute("TRUNCATE TABLE bgd.GameSeries")
     cursor.execute("TRUNCATE TABLE bgd.GameFranchises")
     conn.commit()
     
@@ -72,7 +72,7 @@ try:
             dim_id = int(float(dim_id_str)) if dim_id_str else None
             dim_name = dim_name_str if dim_name_str else None
             
-            # If dim_type is included in our dictionary (genre, theme, collection, franchise)
+            # If dim_type is included in our dictionary (genre, theme, series, franchise)
             if dim_type in data_batches:
                 
                 # We don't store the `dim_type` column itself, only the 4 useful fields.

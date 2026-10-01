@@ -32,7 +32,7 @@ OUTPUT_FILE = "game_infos.csv"
 
 def fetch_page(offset):
     query = (
-        f"fields name,genres.name,themes.name,franchises.name,collections.name; "
+        f"fields name,genres.name,themes.name,franchises.name,series.name; "
         f"limit {PAGE_SIZE}; offset {offset};"
     )
     raw = wrapper.api_request("games", query)
@@ -78,7 +78,7 @@ def main():
                     ("genre",      game.get("genres", [])),
                     ("theme",      game.get("themes", [])),
                     ("franchise",  game.get("franchises", [])),
-                    ("collection", game.get("collections", [])),
+                    ("series", game.get("series", [])),
                 ]
 
                 wrote_any = False
